@@ -99,3 +99,8 @@ servers:
       - name: create_event
         description: Create a calendar event
 ```
+
+## Related examples
+- `examples/configs/mcp-classifier-routing.yaml`
+- `examples/configs/mcp-stateless-broker.yaml`
+- `examples/configs/payload-processing/mcp-static-catalog.yaml`

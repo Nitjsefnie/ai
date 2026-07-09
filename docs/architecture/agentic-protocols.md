@@ -199,16 +199,10 @@ All three filters share these conventions:
 
 ## Key Files
 
-- `filter/src/builtins/http/ai/agentic/json_rpc/`:
-  JSON-RPC 2.0 envelope parser and filter
-- `filter/src/builtins/http/ai/agentic/mcp/`:
-  MCP filter, broker, envelope, protocol
-- `filter/src/builtins/http/ai/agentic/a2a/`:
-  A2A filter, task routing, SSE scanner
-- `filter/src/builtins/http/ai/agentic/mcp/broker/`:
-  MCP broker with static catalog
-- `filter/src/builtins/http/ai/agentic/a2a/task_routing.rs`:
-  in-process task route store with TTL
+- `praxis/filter/src/builtins/http/payload_processing/json_rpc/` (core):
+  JSON-RPC 2.0 envelope parser
+- `filters/src/agentic/mcp/`: MCP filter, broker, envelope
+- `filters/src/agentic/a2a/`: A2A filter, task routing, SSE scanner
 
 ## Related
 

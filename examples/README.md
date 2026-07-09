@@ -13,12 +13,17 @@ Configs use local ports (`3000`, `3001`, ...) for
 upstreams — start a real backend or stub on those ports
 before sending requests.
 
+**Model routing:** `model-to-header-routing.yaml` uses the
+AI `model_to_header` filter. `ai-inference-body-based-routing.yaml`
+uses the core `json_body_field` filter for the same pattern.
+
 ## Configs
 
 ### General
 
 | File | Description |
 | ------ | ------------- |
+| [ai-guardrails.yaml](configs/ai-guardrails.yaml) | AI guardrails filter with NeMo provider endpoint in the request pipeline |
 | [a2a-agent-card-routing.yaml](configs/a2a-agent-card-routing.yaml) | Routes agent card discovery requests to dedicated backends |
 | [a2a-classifier-routing.yaml](configs/a2a-classifier-routing.yaml) | Routes A2A requests by body-derived method, family, context ID, task ID, and streaming detection |
 | [a2a-task-routing.yaml](configs/a2a-task-routing.yaml) | Captures task ownership from SendMessage JSON responses and SendStreamingMessage / SubscribeToTask SSE responses, then routes follow-up task operations back to the backend cluster that created the task |
@@ -55,6 +60,7 @@ before sending requests.
 | [responses-proxy.yaml](configs/openai/responses/responses-proxy.yaml) | Proxies OpenAI Responses API requests to a native /v1/responses backend |
 | [responses-routing.yaml](configs/openai/responses/responses-routing.yaml) | Routes Responses API traffic by detected mode |
 | [tool-routing.yaml](configs/openai/responses/tool-routing.yaml) | Branches request processing by tool composition using filter results from tool_parse |
+| [stream-events.yaml](configs/openai/responses/stream-events.yaml) | Accumulates Responses API SSE events from streaming upstream responses |
 
 ### Payload Processing
 

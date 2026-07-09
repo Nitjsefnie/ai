@@ -22,3 +22,9 @@ This filter has no configuration, body buffering is handled by the upstream `ope
 ```yaml
 filter: openai_responses_validate
 ```
+
+## Related examples
+- `examples/configs/openai/responses/full-flow.yaml`
+- `examples/configs/openai/responses/rehydrate.yaml`
+- `examples/configs/openai/responses/request-validate.yaml`
+- `examples/configs/openai/responses/stream-events.yaml`

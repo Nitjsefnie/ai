@@ -14,7 +14,7 @@ All matched requests are served from the local store and never forwarded upstrea
 | Field | Type | Required | Description |
 |-------|------|---------|-------------|
 | `backend` | `sqlite` \| `postgres` | yes | Storage backend to use. |
-| `database_url` | string (secret) | yes | Database connection URL. Wrapped in [`SecretString`] to prevent accidental logging of credentials. |
+| `database_url` | string (secret) | yes | Database connection URL. Wrapped in `SecretString` to prevent accidental logging of credentials. |
 | `conversations_table` | string | no | Table name for conversation records. |
 | `items_table` | string | no | Table name for conversation item records. |
 | `ssl_mode` | SslMode | no | TLS mode for `PostgreSQL` connections. Only valid when `backend` is `postgres`. Overrides any `sslmode` parameter in the connection URL. |
@@ -30,3 +30,7 @@ database_url: sqlite://conversations.db?mode=rwc
 conversations_table: conversations
 items_table: conversation_items
 ```
+
+## Related examples
+- `examples/configs/openai/conversations/conversations.yaml`
+- `examples/configs/openai/responses/full-flow.yaml`

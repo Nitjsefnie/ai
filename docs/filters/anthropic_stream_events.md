@@ -29,3 +29,6 @@ filter: anthropic_stream_events
 filter: anthropic_stream_events
 max_partial_event_bytes: 10485760
 ```
+
+## Related examples
+- `examples/configs/anthropic/messages-to-openai.yaml`

@@ -25,3 +25,6 @@ filter: anthropic_to_openai
 filter: anthropic_to_openai
 max_body_bytes: 1048576
 ```
+
+## Related examples
+- `examples/configs/anthropic/messages-to-openai.yaml`

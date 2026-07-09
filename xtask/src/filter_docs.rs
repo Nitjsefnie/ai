@@ -1431,7 +1431,7 @@ fn render_map_type(segment: &syn::PathSegment, enums: &BTreeMap<String, EnumInfo
         .first()
         .map_or_else(|| "string".to_owned(), |t| render_type(t, enums));
     let value = args.get(1).map_or_else(|| "any".to_owned(), |t| render_type(t, enums));
-    format!("object<{key}, {value}>")
+    format!("`object<{key}, {value}>`")
 }
 
 /// Render the inner type argument or a fallback.
@@ -1550,7 +1550,7 @@ fn normalize_config_note(paragraph: &str) -> Option<String> {
 
 /// Normalize one field doc comment into safe table-cell prose.
 fn normalize_field_doc(doc: &str) -> String {
-    normalize_doc_prose(doc).unwrap_or_default().replace('|', "\\|")
+    fix_broken_md_links(&normalize_doc_prose(doc).unwrap_or_default()).replace('|', "\\|")
 }
 
 /// Normalize doc comment prose, dropping fenced code and reference definitions.
@@ -1588,17 +1588,89 @@ fn render_filter_doc(entry: &FilterEntry) -> String {
     writeln!(out).unwrap();
 
     if !entry.filter.description.is_empty() {
-        writeln!(out, "{}", entry.filter.description).unwrap();
+        writeln!(out, "{}", fix_broken_md_links(&entry.filter.description)).unwrap();
     }
     for description in &entry.filter.extra_descriptions {
         writeln!(out).unwrap();
-        writeln!(out, "{description}").unwrap();
+        writeln!(out, "{}", fix_broken_md_links(description)).unwrap();
     }
 
     render_config_notes(&mut out, &entry.filter.config_notes);
     render_config_table(&mut out, &entry.filter.fields);
     render_yaml_examples(&mut out, &entry.filter.yaml_examples);
+    render_related_examples(&mut out, &workspace_root(), &entry.filter.name);
     out
+}
+
+/// Replace broken intradoc links like `` [`Name`] `` with inline code.
+fn fix_broken_md_links(text: &str) -> String {
+    let mut result = text.to_owned();
+    let mut search_from = 0;
+    while let Some(rel_start) = result[search_from..].find("[`") {
+        let start = search_from + rel_start;
+        let Some(rel_end) = result[start..].find("`]") else {
+            break;
+        };
+        let end = start + rel_end + 2;
+        if result[end..].starts_with('(') {
+            search_from = end;
+            continue;
+        }
+        let inner = result[start + 2..end - 2].to_owned();
+        let suffix = result[end..].to_owned();
+        result = format!("{}`{inner}`{suffix}", &result[..start]);
+        search_from = start + inner.len() + 2;
+    }
+    result
+}
+
+/// List example config paths that reference the given filter.
+fn discover_example_paths(root: &Path, filter_name: &str) -> Vec<String> {
+    let examples_dir = root.join("examples/configs");
+    let mut yaml_files = Vec::new();
+    collect_yaml_files(&examples_dir, &mut yaml_files);
+    let needle = format!("filter: {filter_name}");
+    let mut matches = Vec::new();
+    for path in yaml_files {
+        let Ok(content) = fs::read_to_string(&path) else {
+            continue;
+        };
+        if content.contains(&needle) {
+            if let Ok(rel) = path.strip_prefix(root) {
+                matches.push(rel.display().to_string());
+            }
+        }
+    }
+    matches.sort();
+    matches
+}
+
+/// Recursively collect `.yaml` files under `dir`.
+fn collect_yaml_files(dir: &Path, out: &mut Vec<PathBuf>) {
+    let Ok(entries) = fs::read_dir(dir) else {
+        return;
+    };
+    for entry in entries.flatten() {
+        let path = entry.path();
+        if path.is_dir() {
+            collect_yaml_files(&path, out);
+        } else if path.extension().is_some_and(|ext| ext == "yaml") {
+            out.push(path);
+        }
+    }
+}
+
+/// Append links to example configs that use this filter.
+fn render_related_examples(out: &mut String, root: &Path, filter_name: &str) {
+    let examples = discover_example_paths(root, filter_name);
+    if examples.is_empty() {
+        return;
+    }
+    writeln!(out).unwrap();
+    writeln!(out, "## Related examples").unwrap();
+    for path in examples {
+        writeln!(out, "- `{path}`").unwrap();
+    }
 }
 
 /// Render configuration notes if present.

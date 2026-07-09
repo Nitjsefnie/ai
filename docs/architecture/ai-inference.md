@@ -150,11 +150,12 @@ OpenAI-compatible chat completion request bodies.
 Static configured messages are prepended or appended
 to the `messages` array. Uses `BodyAccess::ReadWrite`.
 
-### `credential_injection`
+### `credential_injection` (core builtin)
 
 Per-cluster API key injection with client credential
-stripping. Supports inline values and environment
-variable sources.
+stripping. Provided by Praxis core, commonly paired with
+AI pipelines. See
+[core credential_injection docs](https://github.com/praxis-proxy/praxis/blob/main/docs/filters/http/security/credential_injection.md).
 
 ### `openai_response_store`
 
@@ -163,18 +164,12 @@ Persists non-streaming Responses API responses. See
 
 ## Key Files
 
-- `filter/src/builtins/http/ai/classifier/mod.rs`:
-  pure format classifier
-- `filter/src/builtins/http/ai/openai/responses/mod.rs`:
-  `ResponsesFormatFilter`
-- `filter/src/builtins/http/ai/inference/model_to_header.rs`:
-  `ModelToHeaderFilter`
-- `filter/src/builtins/http/ai/prompt_enrich/`:
-  prompt enrichment filter
-- `filter/src/builtins/http/ai/anthropic/`:
-  Anthropic Messages format filter
-- `filter/src/body/mode.rs`:
-  `BodyMode::StreamBuffer` definition
+- `apis/src/classifier/mod.rs`: pure format classifier
+- `apis/src/openai/responses/`: Responses format, validate, store filters
+- `filters/src/inference/model_to_header.rs`: `ModelToHeaderFilter`
+- `filters/src/prompt_enrich/`: prompt enrichment filter
+- `apis/src/anthropic/`: Anthropic Messages filters
+- `praxis/filter/src/body/mode.rs` (core): `BodyMode::StreamBuffer`
 
 ## Related
 

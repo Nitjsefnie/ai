@@ -31,3 +31,7 @@ filter: responses_proxy
 filter: responses_proxy
 max_body_bytes: 67108864
 ```
+
+## Related examples
+- `examples/configs/openai/responses/full-flow.yaml`
+- `examples/configs/openai/responses/responses-proxy.yaml`

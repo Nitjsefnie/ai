@@ -41,7 +41,7 @@ version = "0.1.0"
 
 [dependencies]
 async-trait = "0.1"
-praxis-proxy-filter = "0.3"
+praxis-proxy-filter = "0.4"
 serde = { version = "1", features = ["derive"] }
 serde_yaml = { package = "yaml_serde", version = "0.10" }
 ```
@@ -294,3 +294,18 @@ filter with `FilterFactory::Http(Arc::new(factory))`,
 build a minimal YAML config, and assert on status codes
 and response bodies. See `tests/integration/` for
 examples.
+
+Built-in filter reference pages are generated from source.
+After changing a filter config struct, run:
+
+```console
+cargo xtask generate-filter-docs
+```
+
+CI runs `cargo xtask lint-filter-docs` as part of `make lint`.
+Every example under `examples/configs/` must have an
+integration test (or an entry in the SKIP allowlist):
+
+```console
+cargo xtask lint-example-tests
+```

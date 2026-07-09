@@ -25,3 +25,6 @@ filter: anthropic_messages_protocol
 filter: anthropic_messages_protocol
 default_version: "2023-06-01"
 ```
+
+## Related examples
+- `examples/configs/anthropic/messages-protocol.yaml`

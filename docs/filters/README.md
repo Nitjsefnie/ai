@@ -21,11 +21,16 @@ apis/src/                 Provider API filters
   token_usage/            Token counting
 
 filters/src/              Cross-provider filters
-  agentic/                MCP, A2A, JSON-RPC
+  agentic/                MCP, A2A
   guardrails/             AI content guardrails
-  inference/              Model routing, credentials
+  inference/              model_to_header
   prompt_enrich/          Prompt injection
+  token_count/            Token usage extraction
 ```
+
+Core builtins used alongside AI filters: `json_rpc`,
+`credential_injection`, `router`, `load_balancer`. See
+[Praxis core filter reference][praxis-filters].
 
 ### Provider APIs (`praxis-ai-apis`)
 
@@ -43,6 +48,8 @@ filters/src/              Cross-provider filters
 | `openai_response_store` | Persists responses to storage backend |
 | `openai_conversations` | Handles `/v1/conversations` endpoints |
 | `responses_proxy` | Rebuilds request body from `ResponsesState` |
+| `openai_stream_events` | Accumulates Responses API SSE events |
+| `tool_parse` | Parses tools for branch routing |
 
 ### Cross-Provider Filters (`praxis-ai-filters`)
 
@@ -50,10 +57,10 @@ filters/src/              Cross-provider filters
 |--------|-------------|
 | `a2a` | A2A protocol metadata extraction |
 | `mcp` | MCP protocol broker and routing |
-| `json_rpc` | JSON-RPC 2.0 envelope parsing |
 | `ai_guardrails` | External guardrail provider integration |
 | `model_to_header` | Promotes `model` body field to header |
 | `prompt_enrich` | Injects messages into chat completions |
+| `token_count` | Extracts token usage into filter metadata |
 | `token_usage_headers` | Token count response headers |
 
 ## Registration

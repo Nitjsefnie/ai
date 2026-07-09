@@ -27,3 +27,6 @@ phase:
   request: true
   response: false
 ```
+
+## Related examples
+- `examples/configs/ai-guardrails.yaml`

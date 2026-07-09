@@ -3,7 +3,7 @@
 
 # `token_usage_headers`
 
-Injects `Praxis-Token-Input`, `Praxis-Token-Output`, and `Praxis-Token-Total` headers into downstream responses when token usage data is present in [`filter_metadata`].
+Injects `Praxis-Token-Input`, `Praxis-Token-Output`, and `Praxis-Token-Total` headers into downstream responses when token usage data is present in `filter_metadata`.
 
 ## Configuration Notes
 
@@ -16,3 +16,6 @@ When no token metadata is present the filter is a no-op.
 ```yaml
 filter: token_usage_headers
 ```
+
+## Related examples
+- `examples/configs/token-usage-headers.yaml`

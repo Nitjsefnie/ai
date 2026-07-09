@@ -35,3 +35,9 @@ headers:
   model: x-praxis-ai-model
   stream: x-praxis-ai-stream
 ```
+
+## Related examples
+- `examples/configs/anthropic/messages-protocol.yaml`
+- `examples/configs/anthropic/messages-to-openai.yaml`
+- `examples/configs/anthropic/request-validate.yaml`
+- `examples/configs/anthropic/unified-gateway.yaml`

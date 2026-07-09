@@ -45,3 +45,14 @@ headers:
   stream: x-praxis-ai-stream
   mode: x-praxis-responses-mode
 ```
+
+## Related examples
+- `examples/configs/anthropic/unified-gateway.yaml`
+- `examples/configs/openai/responses/format-routing.yaml`
+- `examples/configs/openai/responses/full-flow.yaml`
+- `examples/configs/openai/responses/model-rewrite.yaml`
+- `examples/configs/openai/responses/rehydrate.yaml`
+- `examples/configs/openai/responses/request-validate.yaml`
+- `examples/configs/openai/responses/response-store.yaml`
+- `examples/configs/openai/responses/responses-routing.yaml`
+- `examples/configs/openai/responses/stream-events.yaml`

@@ -28,3 +28,7 @@ filter: openai_stream_events
 # timeout_secs: 300
 # max_tool_call_argument_bytes: 1048576
 ```
+
+## Related examples
+- `examples/configs/openai/responses/full-flow.yaml`
+- `examples/configs/openai/responses/stream-events.yaml`

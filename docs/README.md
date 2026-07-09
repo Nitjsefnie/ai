@@ -1,22 +1,48 @@
 # Praxis AI Documentation
 
-AI inference filters, agentic protocol support, and provider
-API integrations built on
-[Praxis](https://github.com/praxis-proxy/praxis).
+AI gateway filters, provider APIs, and agentic protocol
+support built on [Praxis](https://github.com/praxis-proxy/praxis).
+
+Run the `praxis-ai` binary for all features below. Core proxy
+capabilities (router, load balancer, TLS, CORS) come from
+Praxis builtins — see [core docs](https://github.com/praxis-proxy/praxis/tree/main/docs).
+
+## Getting started
+
+- [Quickstart](quickstart.md)
+- [Features](features.md)
+- [Example configs](../examples/README.md)
+
+## Guides
+
+- [OpenAI Responses API](openai-responses.md)
+- [Anthropic Messages API](anthropic-messages.md)
+- [Token counting](token-counting.md)
 
 ## Architecture
 
-- [AI Inference](architecture/ai-inference.md)
-- [Agentic Protocols](architecture/agentic-protocols.md)
-- [Response Store](architecture/response-store.md)
+- [Crate layout](architecture/crate-layout.md)
+- [AI inference pipeline](architecture/ai-inference.md)
+- [Agentic protocols](architecture/agentic-protocols.md)
+- [Response store](architecture/response-store.md)
 
 ## Filters
 
-- [Filter reference](filters/)
-- [Anthropic Messages](anthropic-messages.md)
-- [Anthropic Messages replay test plan](anthropic-messages-replay-test-plan.md)
+- [Filter overview](filters/README.md)
+- [Filter reference](filters/reference.md)
+- [Extensions](filters/extensions.md)
+
+## Developing
+
+- [Getting started](developing/getting-started.md)
+- [Conventions](developing/conventions.md)
+- [Adding filters](developing/adding-filters.md)
+
+## Core operating docs
+
+TLS, security hardening, and YAML schema details live in the
+[Praxis core documentation](https://github.com/praxis-proxy/praxis/tree/main/docs/operating).
 
 ## Reference
 
-- [Example configs](../examples/README.md)
-- [Proposals](proposals/)
+- [Proposals](proposals.md)

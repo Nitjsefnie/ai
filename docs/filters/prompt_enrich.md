@@ -39,3 +39,6 @@ append:
   - role: user
     content: "Remember to cite your sources."
 ```
+
+## Related examples
+- `examples/configs/prompt-enrichment.yaml`

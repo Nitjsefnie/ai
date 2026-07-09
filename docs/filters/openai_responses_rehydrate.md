@@ -14,3 +14,7 @@ The request body is **not** modified; downstream filters read from `ResponsesSta
 ```yaml
 filter: openai_responses_rehydrate
 ```
+
+## Related examples
+- `examples/configs/openai/responses/full-flow.yaml`
+- `examples/configs/openai/responses/rehydrate.yaml`

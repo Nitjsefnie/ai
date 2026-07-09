@@ -20,12 +20,9 @@ health checks, etc.), see the
   header-based routing to provider-specific clusters.
   Uses StreamBuffer to inspect the body before upstream
   selection.
-- **Credential injection** (`credential_injection`):
-  per-cluster API key injection with client credential
-  stripping. Supports inline values and environment
-  variable sources. Pair with a source discriminator
-  (IP ACL, client auth) to control which clients get
-  credential upgrades.
+- **Credential injection** (`credential_injection`, core):
+  per-cluster API key injection. Pair with IP ACL or
+  client auth to control which clients receive upgrades.
 - **Prompt enrichment** (`prompt_enrich`): inject system
   or user messages into OpenAI-compatible chat
   completion request bodies at the proxy layer. Static
@@ -65,6 +62,11 @@ health checks, etc.), see the
   `/v1/conversations` endpoints locally.
 - **Responses proxy** (`responses_proxy`): rebuilds
   the request body from `ResponsesState` when present.
+- **Stream events** (`openai_stream_events`): accumulates
+  native Responses API SSE events for downstream filters.
+- **Tool routing** (`tool_parse`): parses `tools` and
+  `tool_choice` for branch-chain routing without mutating
+  the body.
 
 ## Anthropic Messages API
 
@@ -89,27 +91,23 @@ health checks, etc.), see the
 
 ## AI Agentic
 
-- **JSON-RPC 2.0 foundation** (`json_rpc`): request
-  envelope parsing and method/id extraction for HTTP
-  POST bodies, enabling method-based routing for
-  MCP/A2A-style traffic.
-- **MCP proxying** (`mcp`): Model Context Protocol
-  broker with tool discovery and routing via the
-  filter pipeline.
-- **A2A proxying** (`a2a`): Agent-to-Agent protocol
-  support with task routing via the filter pipeline.
+- **JSON-RPC 2.0 foundation** (`json_rpc`, core): request
+  envelope parsing for MCP/A2A-style traffic.
+- **MCP proxying** (`mcp`): MCP broker with catalog and
+  session metadata; `tools/call` is not forwarded by the
+  stateless broker profile.
+- **A2A proxying** (`a2a`): task routing and SSE detection
+  for Agent-to-Agent traffic.
 
 ## Security and Observability
 
-- **AI guardrails** (`ai_guardrails`): calls an
-  external AI guardrail provider to evaluate request
-  bodies. The provider determines whether content
-  should be passed, blocked, or redacted.
+- **AI guardrails** (`ai_guardrails`): external provider
+  evaluates request bodies (response phase planned).
+- **Token counting** (`token_count`): extracts usage from
+  provider responses (JSON and SSE) into filter metadata.
 - **Token usage headers** (`token_usage_headers`):
   injects `Praxis-Token-Input`, `Praxis-Token-Output`,
-  and `Praxis-Token-Total` headers into downstream
-  responses when token usage data is present in filter
-  metadata.
+  and `Praxis-Token-Total` when metadata is present.
 
 ## Extensions
 

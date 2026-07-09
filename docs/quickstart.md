@@ -68,10 +68,8 @@ curl http://127.0.0.1:8080/v1/responses \
 
 ## Next steps
 
-- [Example configs](../examples/README.md): working YAML
-  for every feature.
-- [Filters](filters/README.md): AI filters and how to
-  write your own.
-- [Praxis core](https://github.com/praxis-proxy/praxis):
-  listener, filter-chain, routing, and load-balancer
-  configuration.
+- [OpenAI Responses](openai-responses.md) and
+  [Anthropic Messages](anthropic-messages.md) guides
+- [Example configs](../examples/README.md)
+- [Filters](filters/README.md)
+- [Praxis core](https://github.com/praxis-proxy/praxis)

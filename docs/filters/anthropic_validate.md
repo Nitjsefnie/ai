@@ -16,3 +16,6 @@ Validates Anthropic Messages request bodies for proxy-owned JSON envelope requir
 ```yaml
 filter: anthropic_validate
 ```
+
+## Related examples
+- `examples/configs/anthropic/request-validate.yaml`
